@@ -13,11 +13,21 @@ const getContacts=(req, res) => {
 //  acces to this api is public 
 
 const createContacts=(req, res) => {
-    res.status(201).json({
-        "message": "Create contact"
-    });
-}
+    console.log("The request body id :",req.body);
+    const{
+        name,email,phone
+    }=req.body;
 
+    if(!name || !email || !phone){
+        res.status(400);
+        throw new Error("Please add all fields");
+    }
+
+    res.status(201).json({
+        "message": "Create contact",
+    });
+
+}
 
 /*
 desc get contacts for id 
@@ -52,9 +62,9 @@ const deleteContacts=(req, res) => {
 }
 
 module.exports  ={
-    getContacts:getContacts,
-    createContacts:createContacts,
-    getContact:getContact,
-    updateContacts:updateContacts,
-    deleteContacts:deleteContacts
+    getContacts,
+    createContacts,
+  getContact,
+   updateContacts,
+   deleteContacts
 };
