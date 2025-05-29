@@ -2,8 +2,12 @@ const express=require("express");
 const dotenv=require("dotenv");
 const contactRoutes=require("./routes/contactRoutes");
 const errorHandler=require("./middleware/errorHandler");
+const connectDb=require("./config/dbConnection");
+
+
 
 dotenv.config();
+connectDb();
 
 const app =express();
 
@@ -16,6 +20,7 @@ app.use("/api/contacts",contactRoutes);
 // always place the error handler after all routes
 
 app.use(errorHandler);
+
 
 app.listen(port,()=>{
     console .log(`server running on port ${port}`);
